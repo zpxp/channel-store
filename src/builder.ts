@@ -23,5 +23,6 @@ export class MiddlewareBuilder<State extends object = any> {
 	 */
 	addDefaultState(defaultState: State) {
 		this.defaultState = defaultState;
+		return this;
 	}
 }
