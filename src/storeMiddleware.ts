@@ -1,18 +1,23 @@
 import { EventMiddleware, IHub } from "channel-event";
 import { storeEvents, UPDATE_STATE_DATA } from "./events";
+import { MiddlewareBuilder } from "./builder";
 
 /**
  * Creates a `channel-event` middleware that intercepts data and stores it inside a state that can be accessed at any time
  * @param options store configuration
  */
-export function createStoreMiddleware<State extends object = any>(hub: IHub, options?: Options): StoreContext<State> {
-	const defaultOptions: Options = {
-		defaultStore: {}
+export function createStoreMiddleware<State extends object = any>(hub: IHub): MiddlewareBuilder<State> {
+	return new MiddlewareBuilder<State>(opts => handleCreateStoreMiddleware<State>(hub, opts));
+}
+
+function handleCreateStoreMiddleware<State extends object = any>(hub: IHub, options: Options): StoreContext<State> {
+	const defaultOptions: Partial<Options> = {
+		defaultState: {}
 	};
 
 	options = { ...defaultOptions, ...options };
 
-	let state: State = options.defaultStore;
+	let state: State = options.defaultState;
 
 	const channelEventStoreMiddleware: EventMiddleware<State> = function(context, next, channel) {
 		if (context.type === storeEvents.GET_STATE) {
@@ -37,7 +42,7 @@ export function createStoreMiddleware<State extends object = any>(hub: IHub, opt
 				// notify store updated
 				channel.send(storeEvents.STATE_UPDATED, state);
 			} else if (context.type === storeEvents.CLEAR_STATE) {
-				state = options.defaultStore;
+				state = options.defaultState;
 
 				// notify store updated
 				channel.send(storeEvents.STATE_UPDATED, state);
@@ -53,6 +58,8 @@ export function createStoreMiddleware<State extends object = any>(hub: IHub, opt
 		}
 	};
 
+	hub.addEventMiddleware(channelEventStoreMiddleware);
+
 	return {
 		middleware: channelEventStoreMiddleware,
 		getState: function() {
@@ -61,13 +68,13 @@ export function createStoreMiddleware<State extends object = any>(hub: IHub, opt
 	};
 }
 
-type Options<State extends object = any> = {
-	defaultStore?: State;
+export type Options<State extends object = any> = {
+	defaultState?: State;
 };
 
-interface StoreContext<State extends object = any> {
+export interface StoreContext<State extends object = any> {
 	/**
-	 * The middleware function to pass to `IHub.addEventMiddleware`
+	 * The middleware function that is automaticly passed to `hub.addEventMiddleware`
 	 */
 	middleware: EventMiddleware<State>;
 	/**
