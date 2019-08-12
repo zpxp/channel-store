@@ -17,7 +17,6 @@ const webpack = require("webpack");
 const config = require("../config/webpack.config.js");
 const paths = require("../config/paths");
 const chalk = require("chalk");
-const tscompile = require("./compiler/tscompile");
 const tsconfig = require("../tsconfig.json");
 
 const useYarn = fs.existsSync(paths.yarnLockFile);
