@@ -17,7 +17,7 @@ function handleCreateStoreMiddleware<State extends object = any>(hub: IHub, opti
 
 	options = { ...defaultOptions, ...options };
 
-	let state: State = options.defaultState;
+	let state: State = options.defaultState as State;
 
 	const channelEventStoreMiddleware: EventMiddleware<State> = function(context, next, channel) {
 		if (context.type === storeEvents.GET_STATE) {
@@ -42,7 +42,7 @@ function handleCreateStoreMiddleware<State extends object = any>(hub: IHub, opti
 				// notify store updated
 				channel.send(storeEvents.STATE_UPDATED, state);
 			} else if (context.type === storeEvents.CLEAR_STATE) {
-				state = options.defaultState;
+				state = options.defaultState as State;
 
 				// notify store updated
 				channel.send(storeEvents.STATE_UPDATED, state);
@@ -69,7 +69,7 @@ function handleCreateStoreMiddleware<State extends object = any>(hub: IHub, opti
 }
 
 export type Options<State extends object = any> = {
-	defaultState?: State;
+	defaultState?: Partial<State>;
 };
 
 export interface StoreContext<State extends object = any> {

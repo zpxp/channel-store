@@ -1,7 +1,7 @@
 import { Options, StoreContext } from "./storeMiddleware";
 
 export class MiddlewareBuilder<State extends object = any> {
-	private defaultState: State;
+	private defaultState: Partial<State>;
 	private builder: (opts: Options<State>) => StoreContext<State>;
 
 	constructor(builder: (opts: Options<State>) => StoreContext<State>) {
@@ -21,7 +21,7 @@ export class MiddlewareBuilder<State extends object = any> {
 	 * Add a default state object that will be the initial state of the store
 	 * @param defaultState 
 	 */
-	addDefaultState(defaultState: State) {
+	addDefaultState(defaultState: Partial<State>) {
 		this.defaultState = defaultState;
 		return this;
 	}
