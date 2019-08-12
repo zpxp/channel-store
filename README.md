@@ -14,15 +14,15 @@ import { createHub } from "channel-event";
 import { createStoreMiddleware, IStoreEvents } from "channel-store";
 
 export interface AppStore {
-	count: number
+   count: number
 }
 
 
 const hub = createHub(...);
 
 const store = createStoreMiddleware<AppStore>(hub)
-						.addDefaultState({ count: 4 })
-						.build();
+                  .addDefaultState({ count: 4 })
+                  .build();
 
 
 const channel = hub.newChannel<IStoreEvents>();
@@ -44,7 +44,7 @@ const state = channel.send(storeEvents.GET_STATE);
 
 // listen to state change
 channel.listen(storeEvents.STATE_UPDATED, data => {
-	const newState = data.payload;
+   const newState = data.payload;
 });
 
 ```
