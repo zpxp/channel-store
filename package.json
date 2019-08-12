@@ -8,7 +8,12 @@
     "files": [
         "dist/**/*",
         "lib/**/*"
-    ],
+	 ],
+	 "keywords": [
+		"channel-event",
+		"store",
+		"redux" 
+	 ],
     "scripts": {
         "analyze": "source-map-explorer dist/js/main.*",
         "build": "yarn install && node scripts/build.js",
