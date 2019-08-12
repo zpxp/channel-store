@@ -11,12 +11,6 @@ export function createStoreMiddleware<State extends object = any>(hub: IHub): Mi
 }
 
 function handleCreateStoreMiddleware<State extends object = any>(hub: IHub, options: Options): StoreContext<State> {
-	const defaultOptions: Partial<Options> = {
-		defaultState: {}
-	};
-
-	options = { ...defaultOptions, ...options };
-
 	let state: State = options.defaultState as State;
 
 	const channelEventStoreMiddleware: EventMiddleware<State> = function(context, next, channel) {

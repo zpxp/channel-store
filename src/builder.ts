@@ -4,6 +4,10 @@ export class MiddlewareBuilder<State extends object = any> {
 	private defaultState: Partial<State>;
 	private builder: (opts: Options<State>) => StoreContext<State>;
 
+	private defaultOptions: Partial<Options> = {
+		defaultState: {}
+	};
+
 	constructor(builder: (opts: Options<State>) => StoreContext<State>) {
 		this.builder = builder;
 	}
@@ -13,13 +17,13 @@ export class MiddlewareBuilder<State extends object = any> {
 	 */
 	build(): StoreContext<State> {
 		return this.builder({
-			defaultState: this.defaultState
+			defaultState: this.defaultState || this.defaultOptions.defaultState
 		});
 	}
 
 	/**
 	 * Add a default state object that will be the initial state of the store
-	 * @param defaultState 
+	 * @param defaultState
 	 */
 	addDefaultState(defaultState: Partial<State>) {
 		this.defaultState = defaultState;
