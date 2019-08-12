@@ -5,6 +5,7 @@ A `channel-event` middleware to create an ambient state that functions similar t
 ### Installation
 
 `yarn add channel-store`
+
 `npm install channel-store`
 
 ### Use
