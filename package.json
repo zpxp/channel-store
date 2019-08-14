@@ -1,6 +1,6 @@
 {
     "name": "channel-store",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "main": "lib/index.js",
     "repository": "https://github.com/zpxp/channel-store.git",
     "author": "brendo",
@@ -62,6 +62,6 @@
         "webpack": "4.30.0"
     },
     "dependencies": {
-        "channel-event": "^3.0.*"
+        "channel-event": "^3.1.*"
     }
 }
