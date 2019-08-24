@@ -1,5 +1,7 @@
 # channel-store
 
+![Bundlephobia gzip + minified](https://badgen.net/bundlephobia/minzip/channel-store)
+
 A `channel-event` middleware to create an ambient state that functions similar to `redux` but without the large amount of boilerplate and verbosity.
 
 ### Installation
