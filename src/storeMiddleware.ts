@@ -20,6 +20,9 @@ function handleCreateStoreMiddleware<State extends object = any>(hub: IHub, opti
 		}
 
 		if (context.type === storeEvents.UPDATE_STATE || context.type === storeEvents.CLEAR_STATE) {
+			// first invoke listeners for these events
+			next(context);
+
 			if (context.type === storeEvents.UPDATE_STATE) {
 				const update: UPDATE_STATE_DATA = context.payload;
 				let newStore = null;
@@ -41,8 +44,6 @@ function handleCreateStoreMiddleware<State extends object = any>(hub: IHub, opti
 				// notify store updated
 				channel.send(storeEvents.STATE_UPDATED, state);
 			}
-
-			next(context);
 
 			// we override the return and return the current state
 			return state;
