@@ -1,2 +1,2 @@
 export { storeEvents, IStoreEvents } from "./events";
-export { createStoreMiddleware } from "./storeMiddleware";
+export { createStoreMiddleware, StoreContext, Options } from "./storeMiddleware";

@@ -1,6 +1,6 @@
 {
     "name": "channel-store",
-    "version": "1.0.7",
+    "version": "1.1.1",
     "main": "lib/index.js",
     "repository": "https://github.com/zpxp/channel-store.git",
     "author": "brendo",
@@ -50,7 +50,7 @@
         "jest-resolve": "24.7.1",
         "jsdom": "14.0.0",
         "mini-css-extract-plugin": "0.6.0",
-        "node-sass": "4.11.0",
+        "node-sass": "4.12.0",
         "path": "0.12.7",
         "pnp-webpack-plugin": "1.4.1",
         "postcss-flexbugs-fixes": "4.1.0",
